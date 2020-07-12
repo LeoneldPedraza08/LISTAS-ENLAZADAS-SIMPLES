@@ -1,0 +1,38 @@
+package Clases;
+
+/**
+ *
+ * @author Fabrissio
+ */
+public class CNodo {
+    
+    private int valor;
+    private CNodo siguiente;
+
+    public CNodo(int valor, CNodo siguiente) {
+        this.valor = valor;
+        this.siguiente = siguiente;
+    }
+    
+    public CNodo(){
+        valor = 0;
+        siguiente = null;
+    }
+
+    public int getValor() {
+        return valor;
+    }
+
+    public void setValor(int valor) {
+        this.valor = valor;
+    }
+
+    public CNodo getSiguiente() {
+        return siguiente;
+    }
+
+    public void setSiguiente(CNodo siguiente) {
+        this.siguiente = siguiente;
+    }
+    
+}
