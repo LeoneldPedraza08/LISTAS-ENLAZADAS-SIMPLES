@@ -1,0 +1,187 @@
+package Clases;
+
+import java.util.Scanner;
+
+/**
+ *
+ * @author Fabrissio
+ */
+public class Lista {
+
+    private CNodo inicio;
+    private int tope;
+    
+    static Scanner teclado = new Scanner(System.in);
+
+    public Lista() {
+        inicio = null;
+        tope = 0;
+    }
+
+    public boolean estaVacio() {
+        return inicio == null;
+    }
+
+    public void agregarInicio(int valor) {
+        CNodo nuevo = new CNodo();
+        nuevo.setValor(valor);
+        if (estaVacio()) { //inicio es igual a null
+            inicio = nuevo;
+        } else {
+            nuevo.setSiguiente(inicio);
+            inicio = nuevo;
+        }
+        tope++;
+    }
+
+    public void agregarFinal(int valor) {
+        CNodo nuevo = new CNodo();
+        nuevo.setValor(valor);
+        if (estaVacio()) { //inicio es igual a null
+            inicio = nuevo;
+        } else {
+            CNodo aux = inicio;
+            while (aux.getSiguiente() != null) {
+                aux = aux.getSiguiente();
+            }
+            aux.setSiguiente(nuevo);
+        }
+        tope++;
+    }
+
+    public void mostrar() {
+        if (!estaVacio()) {
+            CNodo aux = inicio;
+            while (aux != null) {
+                System.out.print("[" + aux.getValor() + "] " + " --> ");
+                aux = aux.getSiguiente();
+            }
+        } else {
+            System.out.println("La lista esta vacia...");
+        }
+    }
+
+    public void mostrarPares() {
+        if (!estaVacio()) {
+            CNodo aux = inicio;
+            int cont = 0;
+            while (aux != null) {
+                if (aux.getValor() % 2 == 0){
+                    System.out.print("[" + aux.getValor() + "] " + " --> ");
+                    cont++;
+                }
+                 aux = aux.getSiguiente();
+            }
+           System.out.println("\nLa cantidad de pares: " + cont);
+        } else {
+            System.out.println("La lista esta vacia...");
+        }
+    }
+    
+    public void mostrarImpares(){
+       if (!estaVacio()) {
+            CNodo aux = inicio;
+            int cont = 0;
+            while (aux != null) {
+                if (aux.getValor() % 2 != 0){
+                    System.out.print("[" + aux.getValor() + "] " + " --> ");
+                    cont++;
+                }
+                 aux = aux.getSiguiente();
+            }
+           System.out.println("\nLa cantidad de Impares: " + cont);
+        } else {
+            System.out.println("La lista esta vacia...");
+        }
+    }
+    
+    
+    public void buscarDatos(int valor){
+        if (!estaVacio()) {
+            CNodo aux = inicio;
+            while (aux != null) {
+                if(aux.getValor() == valor){
+                System.out.println("[" + aux.getValor() + "] " + " --> ");
+                }
+                aux = aux.getSiguiente();
+            }
+        } else {
+            System.out.print("La lista esta vacia..");
+        }
+    }
+    
+    
+    public void eliminarInicio(){
+        if (estaVacio()) { //inicio es igual a null
+           System.out.print("La lista esta vacia..");
+        } else {
+            inicio = inicio.getSiguiente();
+            System.out.println("Dato eliminado..");
+        }
+        tope--;
+    }
+        
+    public void eliminarFinal(){
+        if (estaVacio()) { //inicio es igual a null
+            System.out.print("La lista esta vacia..");
+        } else {
+            while (inicio.getSiguiente() != null) {
+                inicio = inicio.getSiguiente();
+                System.out.print("Dato eliminado");
+            }
+        }      
+        tope--;
+    }
+    
+    public void modificarDatos(int valor){
+        int nValor;
+        if (!estaVacio()) {
+            CNodo aux = inicio;
+            while (aux != null) {
+                if(aux.getValor() == valor){
+                    System.out.print("Ingrese nuevo valor: ");
+                    nValor = teclado.nextInt();
+                    aux.setValor(nValor);
+                }
+                aux = aux.getSiguiente();
+            }
+        } else {
+            System.out.print("La lista esta vacia..");
+        }
+    }
+    
+    
+    public void agregarPosicion(int valor) {
+        int pos;
+        System.out.print("Ingrese posicion: ");
+        pos = teclado.nextInt();
+        
+        if(pos >= 1 && pos <= tope){
+           CNodo nuevo = new CNodo();
+           nuevo.setValor(valor);
+           
+           if(pos == 1){
+               nuevo.setSiguiente(inicio);
+               inicio = nuevo;
+           }else{
+               if(pos == tope){
+                   CNodo aux = inicio;
+                   while(aux.getSiguiente() != null){
+                       aux = aux.getSiguiente();
+                   }
+                   aux.setSiguiente(nuevo);
+               }else{
+                   CNodo aux = inicio;
+                   for(int i = 1; i < pos - 1 ; i++){
+                       aux = aux.getSiguiente();
+                   }
+                   CNodo aux1 = aux.getSiguiente();
+                   aux.setSiguiente(nuevo);
+                   nuevo.setSiguiente(aux1);
+               }
+           }
+           tope++;
+        }
+   }
+    
+}
