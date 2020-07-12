@@ -1,0 +1,134 @@
+package Clases;
+
+import java.util.Scanner;
+
+/**
+ *
+ * @author Fabrissio
+ */
+public class AplicaListaSimple {
+
+    static Scanner teclado = new Scanner(System.in);
+    static Lista lista = new Lista();
+    static CNodo nodo;
+
+    public static void main(String[] args) {
+        menu();
+    }
+
+    static void menu() {
+        int opcion;
+        do {
+            System.out.println("\nMenu de Opciones");
+            System.out.println("================");
+            System.out.println("[1] Ingresar Datos al Inicio");
+            System.out.println("[2] Ingresar Datos al Final");
+            System.out.println("[3] Ingresar Datos por posicion");
+            System.out.println("[4] Mostrar lista");
+            System.out.println("[5] Mostrar lista Pares");
+            System.out.println("[6] Mostrar lista Impares");
+            System.out.println("[7] Buscar Dato");
+            System.out.println("[8] Eliminar Dato Inicial");
+            System.out.println("[9] Eliminar Dato Final");
+            System.out.println("[10] Modificar Dato");
+            System.out.println("=============");
+            System.out.println("[0] Salir");
+            System.out.print("Ingresar una opcion: ");
+            opcion = teclado.nextInt();
+
+            switch (opcion) {
+                case 1:
+                    ingresoInicio();
+                    break;
+
+                case 2:
+                    ingresoFinal();
+                    break;
+
+                case 3:
+                    ingresoPosicion();
+                    break;
+
+                case 4:
+                    lista.mostrar();
+                    break;
+
+                case 5:
+                    lista.mostrarPares();
+                    break;
+
+                case 6:
+                    lista.mostrarImpares();
+                    break;
+
+                case 7:
+                    buscarDato();
+                    break;
+
+                case 8:
+                    lista.eliminarInicio();
+                    break;
+
+                case 9:
+                    lista.eliminarFinal();
+                    break;
+
+                case 10:
+                    modificarDato();
+                    break;
+
+                case 0:
+                    System.exit(0);
+                    break;
+
+                default:
+                    System.out.print("Ingrese otra opcion: ");
+            }
+
+        } while (opcion != 0);
+    }
+
+    static void ingresoInicio() {
+        System.out.print("Ingrese un numero: ");
+        int num = teclado.nextInt();
+        while (num <= 20 || num >= 100) {
+            System.out.print("Ingrese un numero: ");
+            num = teclado.nextInt();
+            lista.agregarInicio(num);
+        }
+
+    }
+
+    static void ingresoFinal() {
+        System.out.print("Ingrese un numero: ");
+        int num = teclado.nextInt();
+        if (num >= 20 && num <= 100) {
+            lista.agregarFinal(num);
+        } else {
+            System.out.println("Numero fuera de rango..");
+        }
+    }
+
+    static void ingresoPosicion() {
+        System.out.print("Ingrese un numero: ");
+        int num = teclado.nextInt();
+        lista.agregarPosicion(num);
+    }
+
+    static void buscarDato() {
+        System.out.print("Ingrese numero a buscar: ");
+        int num = teclado.nextInt();
+        lista.buscarDatos(num);
+    }
+
+    static void modificarDato() {
+        System.out.print("Ingrese numero a modificar: ");
+        int num = teclado.nextInt();
+        if (num >= 20 && num <= 100) {
+            lista.modificarDatos(num);
+        } else {
+            System.out.println("Numero fuera de rango..");
+        }
+    }
+
+}
